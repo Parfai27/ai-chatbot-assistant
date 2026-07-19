@@ -1,0 +1,11 @@
+{
+  "name": "ai-chatbot-assistant",
+  "version": "1.0.0",
+  "description": "Professional AI-Powered Chatbot/Assistant",
+  "scripts": {
+    "dev": "cd backend && python run.py",
+    "test": "python scripts/run_tests.py",
+    "lint": "flake8 backend/",
+    "format": "black backend/"
+  }
+}

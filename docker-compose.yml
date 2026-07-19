@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - APP_ENV=production
+      - DATABASE_URL=sqlite:///database/chatbot.db
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SECRET_KEY=${SECRET_KEY}
+      - BASE_URL=${BASE_URL:http://localhost:5000}
+      - CORS_ORIGINS=${CORS_ORIGINS:http://localhost:5000}
+    volumes:
+      - ./database:/app/database
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:5000/api/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
